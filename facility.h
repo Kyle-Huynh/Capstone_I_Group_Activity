@@ -1,8 +1,16 @@
-class Facility {
+#ifndef FACILITY_H
+#define FACILITY_H
+
+#include <string>
+using namespace std;
+
+class facility {
     private:
         int id;
     public:
         int capacity;
-        String location;
+        string location;
         int[] avaiableTimes;
-}
+};
+
+#endif
