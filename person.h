@@ -4,10 +4,13 @@
 #include <string>
 #include <vector>
 #include "facility.h"
-using namespace std;
+#include "reservation.h"
 
-class person {
+//person should not be used at all its just a base class for the subclasses
+class Person {
     public:
+        Person() : name(""), email(""), id(0), password(""), reservations(Reservation()) {} 
+
         string get_name() const;
         string get_email() const;
         string get_id() const;
@@ -15,35 +18,42 @@ class person {
         virtual void view_reservations() const;
         virtual void view_events() const;
 
-        string set_name();
+        string set_name(string alias);
         virtual void request_reservation();
     private:
         string name;
         string email;
         unsigned int id;
         string password;
-        vector<unsigned int> reservations;
+        vector<Reservation*> reservations;
+        bool cancel();
+
+
 
 
 
 };
 
-class student_rep: public person {
+class Rep: public Person {
     public:
+        Rep() : Person(), org("") {}
+
+
+
         void request_reservation();
         void view_reservations() const;
         void view_events() const;
         string get_org() const;
-        void set_org();
+        void set_org(string new_org);
     private:
         string org;
 };
 
-class facility_coord: public person {
+class Facility_coord: public Person {
     public:
-        bool add_facility();
-        bool edit_facility();
-        bool delete_facility();
+        bool add_facility(facility * new_loc);
+        bool edit_facility(facility * loc);
+        bool delete_facility(facility * loc);
 
         void request_reservation();
         void view_reservations() const;
@@ -52,7 +62,7 @@ class facility_coord: public person {
         vector<facility> facilities;
 };
 
-class sys_admin: public person {
+class Admin: public Person {
     public:
         void view_usage() const;
         void request_reservation();
@@ -62,7 +72,7 @@ class sys_admin: public person {
         
 };
 
-class event_approver: public person {
+class Approver: public Person {
     public:
         void request_reservation();
         void view_reservations() const;
