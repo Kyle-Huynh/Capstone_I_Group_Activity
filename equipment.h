@@ -2,20 +2,27 @@
 #define EQUIPMENT_H
 
 #include <string>
+#include "facility.h"
 using namespace std;
 
 class Equipment {
     public:
-        string get_name();
-        unsigned short get_qty();
+        Equipment(string new_name = "", unsigned short new_qty = 0) : name(new_name), qty(new_qty) {
+            for (int i = 0; i < HOURS_PER_DAY; i++) {
+                available[i] = true;
+            }
+        }
 
-        void set_name();
-        void set_qty();
+        void set_name(string new_name);
+        void set_qty(unsigned short new_qty);
+
+        string get_name() const;
+        unsigned short get_qty() const;
 
     private:
         string name;
         unsigned short qty;
-        bool available[8];
+        bool available[HOURS_PER_DAY];
 
 
 };

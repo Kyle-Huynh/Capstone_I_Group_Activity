@@ -9,11 +9,11 @@
 //person should not be used at all its just a base class for the subclasses
 class Person {
     public:
-        Person() : name(""), email(""), id(0), password(""), reservations(Reservation()) {} 
+        Person() : name(""), email(""), id(0), password("") {}
 
         string get_name() const;
         string get_email() const;
-        string get_id() const;
+        unsigned int get_id() const;
 
         virtual void view_reservations() const;
         virtual void view_events() const;
@@ -51,15 +51,15 @@ class Rep: public Person {
 
 class Facility_coord: public Person {
     public:
-        bool add_facility(facility * new_loc);
-        bool edit_facility(facility * loc);
-        bool delete_facility(facility * loc);
+        bool add_facility(Facility * new_loc);
+        bool edit_facility(Facility * loc);
+        bool delete_facility(Facility * loc);
 
         void request_reservation();
         void view_reservations() const;
         void view_events() const;
     private:
-        vector<facility> facilities;
+        vector<Facility> facilities;
 };
 
 class Admin: public Person {
